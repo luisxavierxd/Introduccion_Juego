@@ -1,0 +1,34 @@
+# ========= Unity =========
+# Forzar archivos de texto a LF (evita problemas en multiplataforma)
+*.cs text eol=lf
+*.shader text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.yaml text eol=lf
+*.asmdef text eol=lf
+*.meta text eol=lf
+
+# ========= Archivos binarios =========
+# Git no debe modificar estos
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.psd binary
+*.tga binary
+*.gif binary
+*.fbx binary
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.dll binary
+*.unity binary
+*.prefab binary
+*.asset binary
+*.cubemap binary
+*.mat binary
+
+# ========= Scripts y Config =========
+*.sh text eol=lf
+*.bat text eol=crlf
+*.md text eol=lf
