@@ -13,8 +13,8 @@ public class PayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
 
-    // Fixed Update is called 50x per frame 
-    void Update()
+    // FixedUpdate is called 50x per frame 
+    void FixedUpdate()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
