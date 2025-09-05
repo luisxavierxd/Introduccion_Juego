@@ -10,7 +10,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: horizontal
-    m_EventTreshold: 0.01
+    m_EventTreshold: 0.1
   - m_ConditionMode: 4
     m_ConditionEvent: vertical
     m_EventTreshold: 0.1
@@ -133,7 +133,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 97f8bc5b73988cb4bb66e308581540b6, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0d4dc418c3db6a846b654ce6ee170877, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -186,7 +186,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cfd450efbdf41e34593ebe98a27902aa, type: 2}
+  m_Motion: {fileID: 7400000, guid: a50b271bb0a8b404dae233dca9599dba, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
