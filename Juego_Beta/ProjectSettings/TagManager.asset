@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Sans
   - Audio
+  - Casa
   layers:
   - Default
   - TransparentFX

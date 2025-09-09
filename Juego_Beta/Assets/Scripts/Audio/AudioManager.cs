@@ -3,9 +3,9 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource musicSource;     // Para música de fondo / batalla
-    [SerializeField] private AudioSource SFXSource;       // Para sonidos cortos
-    [SerializeField] private AudioSource stepsSource;     // Para caminar en bucle
+    [SerializeField] private AudioSource musicSource; // Para música de fondo / batalla
+    [SerializeField] private AudioSource SFXSource;   // Para sonidos cortos
+    [SerializeField] private AudioSource stepsSource; // Para caminar en bucle
 
     [Header("Audio Clips")]
     public AudioClip background;
@@ -45,9 +45,13 @@ public class AudioManager : MonoBehaviour
         bool enemigoPresente = HayEnemigo();
 
         if (enemigoPresente && estadoActual != EstadoMusica.Batalla)
+        {
             CambiarMusica(EstadoMusica.Batalla);
+        }
         else if (!enemigoPresente && estadoActual != EstadoMusica.Normal)
+        {
             CambiarMusica(EstadoMusica.Normal);
+        }
     }
 
     bool HayEnemigo()
@@ -63,7 +67,7 @@ public class AudioManager : MonoBehaviour
         {
             case EstadoMusica.Normal:
                 musicSource.clip = background;
-                musicSource.volume = .1f; // volumen más bajo para background
+                musicSource.volume = 0.1f; // volumen más bajo para background
                 break;
             case EstadoMusica.Batalla:
                 musicSource.clip = batalla;
@@ -74,7 +78,6 @@ public class AudioManager : MonoBehaviour
         musicSource.loop = true;
         musicSource.Play();
     }
-
 
     public void PlaySFX(AudioClip clip, float volumen = 1f)
     {
@@ -97,7 +100,9 @@ public class AudioManager : MonoBehaviour
     public void StopSteps()
     {
         if (stepsSource.isPlaying)
+        {
             stepsSource.Stop();
+        }
     }
 
     public void CambiarMusicaFondo(AudioClip clip)
@@ -109,6 +114,4 @@ public class AudioManager : MonoBehaviour
             musicSource.Play();
         }
     }
-
-
 }
