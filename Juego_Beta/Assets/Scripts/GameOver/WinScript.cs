@@ -30,6 +30,13 @@ public class WinScreen : MonoBehaviour
         {
             ShowWinScreen();
         }
+
+        // Solo permitir reinicio si la pantalla de victoria está activa
+        if (canvasGroup.alpha == 1f &&
+            (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)))
+        {
+            Restart();
+        }
     }
 
     public void ShowWinScreen()
@@ -49,8 +56,7 @@ public class WinScreen : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("Botón de reinicio pulsado!");
+        Debug.Log("Enter presionado, reiniciando escena...");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
 }

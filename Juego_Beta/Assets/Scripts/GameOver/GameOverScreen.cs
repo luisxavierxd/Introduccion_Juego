@@ -1,5 +1,5 @@
-﻿using UnityEngine.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverScreen : MonoBehaviour
 {
@@ -7,7 +7,7 @@ public class GameOverScreen : MonoBehaviour
     private PlayerHealth playerHealth;
     public CanvasGroup canvasGroup;
 
-    public GameObject otherCanvas; 
+    public GameObject otherCanvas;
 
     void Start()
     {
@@ -19,6 +19,19 @@ public class GameOverScreen : MonoBehaviour
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
     }
+
+    void Update()
+    {
+        GOSetup();
+
+        // Solo permitir reinicio si la pantalla está activa
+        if (canvasGroup.alpha == 1f &&
+            (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)))
+        {
+            Restart();
+        }
+    }
+
     public void GOSetup()
     {
         if (playerHealth.currentHealth <= 0)
@@ -36,11 +49,9 @@ public class GameOverScreen : MonoBehaviour
         }
     }
 
-
     public void Restart()
     {
-        Debug.Log("Botón pulsado!");
-        SceneManager.LoadScene("SampleScene");
+        Debug.Log("Enter presionado, reiniciando escena...");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
 }
