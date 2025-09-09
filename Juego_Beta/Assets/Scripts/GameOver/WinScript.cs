@@ -9,6 +9,14 @@ public class WinScreen : MonoBehaviour
 
     public GameObject otherCanvas;          // canvas que quieres ocultar (HUD u otro)
 
+    AudioManager audioManager;
+    private bool winScreenShown = false;   // controla que se muestre una sola vez
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
         // obtenemos referencia al script de salud del enemigo
@@ -26,7 +34,7 @@ public class WinScreen : MonoBehaviour
     void Update()
     {
         // verificamos si la salud del enemigo es 0 o menos
-        if (enemyHealth != null && enemyHealth.currentHealth <= 0)
+        if (!winScreenShown && enemyHealth != null && enemyHealth.currentHealth <= 0)
         {
             ShowWinScreen();
         }
@@ -41,6 +49,14 @@ public class WinScreen : MonoBehaviour
 
     public void ShowWinScreen()
     {
+        winScreenShown = true; // marcar como mostrado
+
+        // reproducir sonido de victoria solo una vez
+        audioManager.PlaySFX(audioManager.victoria);
+
+        // cambiar música de fondo a un clip especial de victoria
+        audioManager.CambiarMusicaFondo(audioManager.musicaMenu);
+
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;

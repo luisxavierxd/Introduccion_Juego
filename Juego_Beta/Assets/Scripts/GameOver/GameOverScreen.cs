@@ -6,13 +6,20 @@ public class GameOverScreen : MonoBehaviour
     public GameObject player;
     private PlayerHealth playerHealth;
     public CanvasGroup canvasGroup;
-
     public GameObject otherCanvas;
+
+    AudioManager audioManager;
+    private bool gameOverShown = false; // control para mostrar una sola vez
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     void Start()
     {
         playerHealth = player.GetComponent<PlayerHealth>();
-        canvasGroup = GetComponent<CanvasGroup>(); // debe estar en el mismo Canvas
+        canvasGroup = GetComponent<CanvasGroup>();
 
         // hacemos invisible al inicio
         canvasGroup.alpha = 0f;
@@ -22,9 +29,13 @@ public class GameOverScreen : MonoBehaviour
 
     void Update()
     {
-        GOSetup();
+        // mostramos GameOver solo una vez
+        if (!gameOverShown && playerHealth.currentHealth <= 0)
+        {
+            ShowGameOver();
+        }
 
-        // Solo permitir reinicio si la pantalla está activa
+        // reinicio con Enter si la pantalla está activa
         if (canvasGroup.alpha == 1f &&
             (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)))
         {
@@ -32,21 +43,25 @@ public class GameOverScreen : MonoBehaviour
         }
     }
 
-    public void GOSetup()
+    public void ShowGameOver()
     {
-        if (playerHealth.currentHealth <= 0)
-        {
-            canvasGroup.alpha = 1f;
-            canvasGroup.interactable = true;
-            canvasGroup.blocksRaycasts = true;
+        gameOverShown = true; // marcar como mostrado
 
-            // liberar el mouse
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+        // reproducir sonido de muerte solo una vez
+        audioManager.PlaySFX(audioManager.muerte);
 
-            if (otherCanvas != null)
-                otherCanvas.SetActive(false);
-        }
+        // cambiar música de fondo si quieres
+        audioManager.CambiarMusicaFondo(audioManager.musicaMenu); // o un clip especial de game over
+
+        canvasGroup.alpha = 1f;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (otherCanvas != null)
+            otherCanvas.SetActive(false);
     }
 
     public void Restart()

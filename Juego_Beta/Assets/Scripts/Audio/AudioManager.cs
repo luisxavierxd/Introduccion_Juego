@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("----------Audio Source------------")]
-    [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource SFXSource;
+    [Header("Audio Sources")]
+    [SerializeField] private AudioSource musicSource;     // Para música de fondo / batalla
+    [SerializeField] private AudioSource SFXSource;       // Para sonidos cortos
+    [SerializeField] private AudioSource stepsSource;     // Para caminar en bucle
 
-    [Header("----------Audio Clip------------")]
-    public AudioClip background;  // Música normal
+    [Header("Audio Clips")]
+    public AudioClip background;
+    public AudioClip batalla;
+    public AudioClip caminar;
     public AudioClip casa;
     public AudioClip ataque;
     public AudioClip victoria;
@@ -15,14 +18,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip puerta;
     public AudioClip daño;
     public AudioClip item;
-    public AudioClip batalla;     // Música de batalla
+    public AudioClip musicaMenu;
 
     private enum EstadoMusica { Normal, Batalla }
     private EstadoMusica estadoActual = EstadoMusica.Normal;
 
     void Start()
     {
-        // Verifica si hay enemigos desde el inicio
         if (HayEnemigo())
         {
             estadoActual = EstadoMusica.Batalla;
@@ -43,18 +45,13 @@ public class AudioManager : MonoBehaviour
         bool enemigoPresente = HayEnemigo();
 
         if (enemigoPresente && estadoActual != EstadoMusica.Batalla)
-        {
             CambiarMusica(EstadoMusica.Batalla);
-        }
         else if (!enemigoPresente && estadoActual != EstadoMusica.Normal)
-        {
             CambiarMusica(EstadoMusica.Normal);
-        }
     }
 
     bool HayEnemigo()
     {
-        // Busca objetos con tag "Enemy"
         return GameObject.FindWithTag("Enemy") != null;
     }
 
@@ -66,9 +63,11 @@ public class AudioManager : MonoBehaviour
         {
             case EstadoMusica.Normal:
                 musicSource.clip = background;
+                musicSource.volume = .1f; // volumen más bajo para background
                 break;
             case EstadoMusica.Batalla:
                 musicSource.clip = batalla;
+                musicSource.volume = 0.35f; // volumen más alto para batalla
                 break;
         }
 
@@ -76,9 +75,40 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    // Función opcional para reproducir efectos de sonido
-    public void ReproducirSFX(AudioClip clip)
+
+    public void PlaySFX(AudioClip clip, float volumen = 1f)
     {
+        SFXSource.volume = volumen;
         SFXSource.PlayOneShot(clip);
     }
+
+    // Métodos para pasos
+    public void PlaySteps()
+    {
+        if (!stepsSource.isPlaying)
+        {
+            stepsSource.clip = caminar;
+            stepsSource.loop = true;
+            stepsSource.volume = 1f; // ajusta a tu gusto, 0-1
+            stepsSource.Play();
+        }
+    }
+
+    public void StopSteps()
+    {
+        if (stepsSource.isPlaying)
+            stepsSource.Stop();
+    }
+
+    public void CambiarMusicaFondo(AudioClip clip)
+    {
+        if (musicSource.clip != clip)
+        {
+            musicSource.clip = clip;
+            musicSource.loop = true;
+            musicSource.Play();
+        }
+    }
+
+
 }

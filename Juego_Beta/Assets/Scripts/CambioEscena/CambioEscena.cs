@@ -10,11 +10,17 @@ public class CambioEscena : MonoBehaviour
     public Animator fadeAnim;
     public float fadeTime = 0.5f;
 
+    AudioManager audioManager;
 
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
+            audioManager.PlaySFX(audioManager.puerta);
             fadeAnim.Play("FadeFromWhite");
             StartCoroutine(DelayFade());
         }

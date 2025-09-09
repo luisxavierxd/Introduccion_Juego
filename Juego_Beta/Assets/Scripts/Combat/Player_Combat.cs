@@ -16,6 +16,13 @@ public class Player_Combat : MonoBehaviour
     public float cooldown;
     private float timer;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager =GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     private void Update()
     {
         if (timer > 0)
@@ -41,6 +48,7 @@ public class Player_Combat : MonoBehaviour
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, weaponRange, enemyLayer);
         if (enemies.Length > 0)
         {
+            audioManager.PlaySFX(audioManager.ataque);
             enemies[0].GetComponent<Enemy_Health>().ChangeHealth(-damage);
         }
     }
