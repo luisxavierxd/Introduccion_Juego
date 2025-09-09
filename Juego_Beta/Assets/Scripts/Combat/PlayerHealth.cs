@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,11 +16,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void ChangeHealth(int amount)
     {
-        currentHealth += amount;
-        slider.value = currentHealth;
+        int newHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+
+        if (newHealth != currentHealth)
+        {
+            currentHealth = newHealth;
+            slider.value = currentHealth;
+        }
         if (currentHealth <= 0) {
 
-            gameObject.SetActive(false);
+            FindObjectOfType<GameOverScreen>().GOSetup();
         }
 
     }

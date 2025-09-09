@@ -12,6 +12,16 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isKnockback;
 
+    public Player_Combat player_Combat;
+
+    private void FixedUpdate()
+    {
+        if (Input.GetButtonDown("Slash"))
+        {
+            player_Combat.Attack();
+        }
+    }
+
     // Fixed Update is called 50x per frame 
     void Update()
     {
