@@ -264400,6 +264400,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1564669830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1564669831}
+  m_Layer: 0
+  m_Name: Musica de Fondo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1564669831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564669830}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.854846, y: 1.3502125, z: 1.1639744}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1576036977
 GameObject:
   m_ObjectHideFlags: 0
@@ -264576,11 +264607,11 @@ GameObject:
   - component: {fileID: 1594927630}
   m_Layer: 9
   m_Name: Job_Application
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1594927623
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -265271,7 +265302,7 @@ GameObject:
   - component: {fileID: 1724696906}
   m_Layer: 0
   m_Name: Sans
-  m_TagString: Untagged
+  m_TagString: Sans
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266211,3 +266242,4 @@ SceneRoots:
   - {fileID: 369671247}
   - {fileID: 1812573015}
   - {fileID: 599209656}
+  - {fileID: 1564669831}
