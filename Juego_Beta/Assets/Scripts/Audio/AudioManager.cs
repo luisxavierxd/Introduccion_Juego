@@ -8,8 +8,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
 
-    [Header("----------Audio Clip------------")]
-    public AudioClip background;
+    [Header("----------Audio Clip---------S---")]
+    public AudioClip background;  // Música normal
     public AudioClip casa;    
     public AudioClip ataque;
     public AudioClip victoria;
