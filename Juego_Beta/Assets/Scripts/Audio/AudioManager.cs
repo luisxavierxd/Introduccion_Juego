@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip daño;
     public AudioClip item;
     public AudioClip musicaMenu;
+    public AudioClip GetOUT;
 
     private enum EstadoMusica { Normal, Batalla }
     private EstadoMusica estadoActual = EstadoMusica.Normal;

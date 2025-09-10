@@ -60,6 +60,12 @@ public class StartScreen : MonoBehaviour
         if (!gameStarted &&
             (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)))
         {
+            // Reproducir SFX al iniciar
+            if (audioManager != null && audioManager.GetOUT != null)
+            {
+                audioManager.PlaySFX(audioManager.GetOUT, 1f);
+            }
+
             StartGame();
         }
     }

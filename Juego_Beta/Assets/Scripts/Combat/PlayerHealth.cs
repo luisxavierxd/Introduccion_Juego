@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,17 +15,28 @@ public class PlayerHealth : MonoBehaviour
 
     public void ChangeHealth(int amount)
     {
-        int newHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        slider.value = currentHealth;
 
-        if (newHealth != currentHealth)
+        if (currentHealth <= 0)
         {
-            currentHealth = newHealth;
-            slider.value = currentHealth;
-        }
-        if (currentHealth <= 0) {
-
+            // Mostrar pantalla de Game Over
             FindObjectOfType<GameOverScreen>().ShowGameOver();
-        }
 
+  
+            // Opcional: también detener combates u otras acciones
+            Enemy_Combat[] combates = FindObjectsOfType<Enemy_Combat>();
+            foreach (Enemy_Combat combate in combates)
+            {
+                combate.enabled = false;
+            }
+
+            Enemy_Movement[] enemigos = FindObjectsOfType<Enemy_Movement>();
+            foreach (Enemy_Movement enemigo in enemigos)
+            {
+                enemigo.canMove = false;
+            }
+
+        }
     }
 }

@@ -8,8 +8,8 @@ public class GameOverScreen : MonoBehaviour
     public CanvasGroup canvasGroup;
     public GameObject otherCanvas;
 
-    AudioManager audioManager;
-    private bool gameOverShown = false; // control para mostrar una sola vez
+    private AudioManager audioManager;
+    private bool gameOverShown = false; // control para mostrar solo una vez
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class GameOverScreen : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         canvasGroup = GetComponent<CanvasGroup>();
 
-        // hacemos invisible al inicio
+        // Hacemos invisible al inicio
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
@@ -29,13 +29,13 @@ public class GameOverScreen : MonoBehaviour
 
     void Update()
     {
-        // mostramos GameOver solo una vez
+        // Mostrar GameOver solo una vez
         if (!gameOverShown && playerHealth.currentHealth <= 0)
         {
             ShowGameOver();
         }
 
-        // reinicio con Enter si la pantalla está activa
+        // Reinicio con Enter si la pantalla está activa
         if (canvasGroup.alpha == 1f &&
             (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)))
         {
@@ -45,21 +45,32 @@ public class GameOverScreen : MonoBehaviour
 
     public void ShowGameOver()
     {
-        gameOverShown = true; // marcar como mostrado
+        if (gameOverShown) return; // protección extra
 
-        // reproducir sonido de muerte solo una vez
-        audioManager.PlaySFX(audioManager.muerte);
+        gameOverShown = true;
 
-        // cambiar música de fondo si quieres
-        audioManager.CambiarMusicaFondo(audioManager.musicaMenu); // o un clip especial de game over
+        // Reproducir sonido de muerte una sola vez
+        if (audioManager != null && audioManager.muerte != null)
+        {
+            audioManager.PlaySFX(audioManager.muerte);
+        }
 
+        // Cambiar música de fondo a Game Over en bucle
+        if (audioManager != null && audioManager.musicaMenu != null)
+        {
+            audioManager.CambiarMusicaFondo(audioManager.musicaMenu);
+        }
+
+        // Mostrar canvas
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
 
+        // Liberar mouse
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        // Ocultar otro canvas si se asignó
         if (otherCanvas != null)
             otherCanvas.SetActive(false);
     }
